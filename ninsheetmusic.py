@@ -49,7 +49,7 @@ for file in dl:
 	if new_filename is not None:
 		urllib.request.urlretrieve(file, str(path / new_filename))
 	else:
-		failed.append([file, str(path / "unnamed_" + str(counter) + ".mid"]))
+		failed.append([file, str(path / "unnamed_" + str(counter) + ".mid")])
 	print("|", end="")
 	if counter % 120 == 0:
 		print("\n", end="     ")
