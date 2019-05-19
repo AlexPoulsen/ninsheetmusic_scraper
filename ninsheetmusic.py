@@ -45,11 +45,18 @@ failed = []
 print("downloading files")
 print("     ", end="")
 for file in dl:
-	new_filename = get_filename_from_cd(urllib.request.urlopen(file).headers.get('content-disposition'), counter)
+	try:
+		new_filename = get_filename_from_cd(urllib.request.urlopen(file).headers.get('content-disposition'), counter)
+	except:
+		new_filename = None
+		
 	if new_filename is not None:
-		urllib.request.urlretrieve(file, str(path / new_filename))
+		try:
+			urllib.request.urlretrieve(file, str(path / new_filename))
+		except:
+			pass
 	else:
-		failed.append([file, str(path / "unnamed_" + str(counter) + ".mid")])
+		failed.append([file, str(path / "unnamed_") + str(counter) + ".mid"])
 	print("|", end="")
 	if counter % 120 == 0:
 		print("\n", end="     ")
